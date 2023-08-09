@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -11,8 +12,35 @@ public class Player : MonoBehaviour
     private float playerHeight = 2f;
     private float moveDistance;
     private bool isWalking;
+    private Vector3 lastInteractDir;
     
     private void Update()
+    {
+        HandleMovement();
+        HandleInteractions();
+        
+    }
+
+    private void HandleInteractions()
+    {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+        float interactionDistance = 2f;
+        if (moveDir!=Vector3.zero)
+        {
+            lastInteractDir = moveDir;
+        }
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactionDistance))
+        {
+            Debug.Log(raycastHit.transform);
+        }
+        else
+        {
+            Debug.Log("-");
+        }
+    }
+    private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         
@@ -66,9 +94,6 @@ public class Player : MonoBehaviour
         transform.forward=Vector3.Slerp(transform.forward,moveDir,Time.deltaTime*rotateSpeed);
         
         isWalking = moveDir != Vector3.zero;
-
-        
-
     }
 
     public bool IsWalking()
