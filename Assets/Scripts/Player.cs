@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance { get; private set; }
+
     [SerializeField]private float moveSpeed = 7f;
     [SerializeField]private float rotateSpeed = 10f;
     [SerializeField]private GameInput gameInput;
@@ -17,11 +19,20 @@ public class Player : MonoBehaviour
     private Vector3 lastInteractDir;
     private ClearCounter selectedCounter;
 
-    public event EventHandler <OnSelectedCounterChangedEventArgs> OnSelectedCOunterChanged;
+    public event EventHandler <OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
 
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
         public ClearCounter selectedCounter;
+    }
+
+    private void Awake()
+    {
+        if (Instance!=null)
+        {
+            Debug.LogError("Player 2 joined in a Singleplayer game");
+        }
+        Instance = this;
     }
     private void Update()
     {
@@ -60,7 +71,7 @@ public class Player : MonoBehaviour
                 //Has  ClearCounter
                 if (clearCounter!=selectedCounter)
                 {
-                    SetSelectedCounter(selectedCounter); 
+                    SetSelectedCounter(clearCounter); 
                     
                 }
                 
@@ -75,6 +86,7 @@ public class Player : MonoBehaviour
         {
             SetSelectedCounter(null); 
         }
+        
     }
     
     private void HandleMovement()
@@ -138,10 +150,10 @@ public class Player : MonoBehaviour
         return isWalking;
     }
 
-    private void SetSelectedCounter(ClearCounter selectedConuter)
+    private void SetSelectedCounter(ClearCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
-        OnSelectedCOunterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+        OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
         {
             selectedCounter = selectedCounter
         });
