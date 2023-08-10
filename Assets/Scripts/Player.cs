@@ -60,31 +60,20 @@ public class Player : MonoBehaviour
                 //Has  ClearCounter
                 if (clearCounter!=selectedCounter)
                 {
-                    selectedCounter = clearCounter;
-                    OnSelectedCOunterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
-                    {
-                        selectedCounter = selectedCounter
-                    });
+                    SetSelectedCounter(selectedCounter); 
+                    
                 }
                 
             }
             else
             {
-                selectedCounter = null;
-                OnSelectedCOunterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
-                {
-                    selectedCounter = selectedCounter
-                });
+                SetSelectedCounter(null); 
             }
             
         }
         else
         {
-            selectedCounter = null;
-            OnSelectedCOunterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
-            {
-                selectedCounter = selectedCounter
-            });
+            SetSelectedCounter(null); 
         }
     }
     
@@ -147,5 +136,14 @@ public class Player : MonoBehaviour
     public bool IsWalking()
     {
         return isWalking;
+    }
+
+    private void SetSelectedCounter(ClearCounter selectedConuter)
+    {
+        this.selectedCounter = selectedCounter;
+        OnSelectedCOunterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+        {
+            selectedCounter = selectedCounter
+        });
     }
 }
