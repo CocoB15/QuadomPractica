@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,13 @@ public class Player : MonoBehaviour
     private bool isWalking;
     private Vector3 lastInteractDir;
     private ClearCounter selectedCounter;
-    
+
+    public event EventHandler <OnSelectedCounterChangedEventArgs> OnSelectedCOunterChanged;
+
+    public class OnSelectedCounterChangedEventArgs : EventArgs
+    {
+        public ClearCounter selectedCounter;
+    }
     private void Update()
     {
         HandleMovement();
@@ -54,18 +61,30 @@ public class Player : MonoBehaviour
                 if (clearCounter!=selectedCounter)
                 {
                     selectedCounter = clearCounter;
+                    OnSelectedCOunterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+                    {
+                        selectedCounter = selectedCounter
+                    });
                 }
                 
             }
             else
             {
                 selectedCounter = null;
+                OnSelectedCOunterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+                {
+                    selectedCounter = selectedCounter
+                });
             }
             
         }
         else
         {
             selectedCounter = null;
+            OnSelectedCOunterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+            {
+                selectedCounter = selectedCounter
+            });
         }
     }
     
