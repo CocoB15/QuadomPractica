@@ -22,7 +22,12 @@ public class Player : MonoBehaviour
         
     }
 
-    private void HandleInteractions()
+    private void Start()
+    {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         
@@ -46,6 +51,32 @@ public class Player : MonoBehaviour
             Debug.Log("-");
         }
     }
+
+    private void HandleInteractions()
+    {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+        float interactionDistance = 2f;
+        if (moveDir!=Vector3.zero)
+        {
+            lastInteractDir = moveDir;
+        }
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactionDistance,layerMask))
+        {
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter))
+            {
+                //Has  ClearCounter
+                
+            }
+            
+        }
+        else
+        {
+            
+        }
+    }
+    
     private void HandleMovement()
     {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -72,7 +103,7 @@ public class Player : MonoBehaviour
             {
                 //Cannot move on X axis
                 
-                //Attempt oving on Z axis
+                //Attempt moving on Z axis
                 Vector3 moveDirZ = new Vector3(0,0,moveDir.z).normalized;
                 canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
                     playerRadius, moveDirZ, moveDistance);
