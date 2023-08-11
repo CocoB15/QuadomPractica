@@ -2,30 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IKitchenObjectParent 
+public interface IKitchenObjectParent
 {
-    public Transform GetKitchenObjectFollowTransform()
-    {
-        return counterTopPoint;
-    }
+    public Transform GetKitchenObjectFollowTransform();
+    public void SetKitchenObject(KitchenObject kitchenObject);
+    public KitchenObject GetKitchenObject();
+    public void ClearKitchenObject();
+    public bool HasKitchenObject();
 
-    public void SetKitchenObject(KitchenObject kitchenObject)
-    {
-        this.kitchenObject = kitchenObject;
-    }
-
-    public KitchenObject GetKitchenObject()
-    {
-        return kitchenObject;
-    }
-
-    public void ClearKitchenObject()
-    {
-        kitchenObject = null;
-    }
-
-    public bool HasKitchenObject()
-    {
-        return kitchenObject != null;
-    }
 }
