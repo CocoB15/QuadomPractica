@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,15 @@ using UnityEngine.Serialization;
 
 public class CuttingCounter : BaseCounter
 {
-     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
+    public event EventHandler <OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler OnCut;
+
+    public class OnProgressChangedEventArgs : EventArgs
+    {
+        public float progressNormalized;
+    }
+    
+    [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
      private int cuttingProgress;
     public override void Interact(Player player)
     {
@@ -19,6 +28,11 @@ public class CuttingCounter : BaseCounter
                     //player holding something that can be cut
                     player.GetKitchenObject().SetKitchenObjectParent(this);
                     cuttingProgress = 0;
+                    CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSo());
+                    OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                    {
+                        progressNormalized = (float)cuttingProgress/cuttingRecipeSO.cuttingProgressMax
+                    });
                 }
             }
             else
@@ -48,7 +62,12 @@ public class CuttingCounter : BaseCounter
         {
             //there is kitchenObject on there AND can be cut
             cuttingProgress++;
+            OnCut?.Invoke(this, EventArgs.Empty);
             CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSo());
+            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+            {
+                progressNormalized = (float)cuttingProgress/cuttingRecipeSO.cuttingProgressMax
+            });
             if (cuttingProgress >= cuttingRecipeSO.cuttingProgressMax)
             {
                 KitchenObjectSO outputKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSo());
