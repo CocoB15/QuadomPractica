@@ -10,6 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -896791928446689398, guid: 1b5a9999f6e39c541a50b7444deacf13,
         type: 3}
+      propertyPath: kitchenObjectSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 0d28ca8eef8db65468ae1ee1887c3b40,
+        type: 2}
+    - target: {fileID: -896791928446689398, guid: 1b5a9999f6e39c541a50b7444deacf13,
+        type: 3}
       propertyPath: kitchenObjectSo
       value: 
       objectReference: {fileID: 11400000, guid: 0d28ca8eef8db65468ae1ee1887c3b40,
