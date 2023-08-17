@@ -255,7 +255,7 @@ PrefabInstance:
     - target: {fileID: 4614856403206715002, guid: 5ed70ca19ce609446baf90c5ed4c2849,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4614856403206715002, guid: 5ed70ca19ce609446baf90c5ed4c2849,
         type: 3}
@@ -348,8 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906301b720774a04892ea617939dd553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kitchenObjectSo: {fileID: 11400000, guid: 567f528cd64d45e498cea383f9a615ab, type: 2}
   counterTopPoint: {fileID: 907693365258804430}
+  kitchenObjectSo: {fileID: 11400000, guid: 567f528cd64d45e498cea383f9a615ab, type: 2}
 --- !u!4 &3599789890723148930 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4614856403206715002, guid: 5ed70ca19ce609446baf90c5ed4c2849,
