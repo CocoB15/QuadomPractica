@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlateIconSin : MonoBehaviour
+public class PlateIconSingleUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Image image;
 
-    // Update is called once per frame
-    void Update()
+    public void SetKitchenObjectSO(KitchenObjectSO kitchenObjectSO)
     {
-        
+        image.sprite = kitchenObjectSO.sprite;
     }
 }
