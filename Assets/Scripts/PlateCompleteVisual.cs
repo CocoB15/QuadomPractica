@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class PlateCompleteVisual : MonoBehaviour
 {
     [SerializeField] private PlateKitchenObject plateKitchenObject;
     [SerializeField] private List<KitchenObjectSO_GameObject>kitchenObjectSOGameObjectList;
-
+    [Serializable]
     public struct KitchenObjectSO_GameObject
     {
         public KitchenObjectSO kitchenObjectSO;
@@ -21,6 +22,12 @@ public class PlateCompleteVisual : MonoBehaviour
 
     private void PlateKitchenObject_OnIngredientAdded(object sender, PlateKitchenObject.OnIngredientAddedEvetArgs e)
     {
-        
+        foreach (KitchenObjectSO_GameObject kitchenObjectSoGameObject in kitchenObjectSOGameObjectList)
+        {
+            if (kitchenObjectSoGameObject.kitchenObjectSO==e.kitchenObjectSO)
+            {
+                kitchenObjectSoGameObject.gameObject.SetActive(true);
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ public class PlateKitchenObject : KitchenObject
 
     public class OnIngredientAddedEvetArgs : EventArgs
     {
-        public KitchenObjectSO KitchenObjectSO;
+        public KitchenObjectSO kitchenObjectSO;
     }
 
     private void Awake()
@@ -35,7 +35,7 @@ public class PlateKitchenObject : KitchenObject
             kitchenObjectSOList.Add(kitchenObjectSO);
             OnIngredientAdded?.Invoke(this, new OnIngredientAddedEvetArgs
             {
-                KitchenObjectSO = kitchenObjectSO
+                kitchenObjectSO = kitchenObjectSO
             });
             return true;
         }
