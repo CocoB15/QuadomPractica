@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: Salad
   m_EditorClassIdentifier: 
   KitchenObjectSOList:
-  - {fileID: 11400000, guid: 0d28ca8eef8db65468ae1ee1887c3b40, type: 2}
-  - {fileID: 11400000, guid: e3bcdcf448719684f8fd9f4c43188918, type: 2}
-  - {fileID: 11400000, guid: 8a07a50e27e577f44aa509591d14ec00, type: 2}
   - {fileID: 11400000, guid: f766ea89d8e4d2440b0710ef2386b309, type: 2}
   - {fileID: 11400000, guid: d5eea0255dff95b4ab0728439a7fc308, type: 2}
-  recipeName: BeeseChurger
+  recipeName: Salad

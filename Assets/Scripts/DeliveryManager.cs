@@ -22,7 +22,7 @@ public class DeliveryManager : MonoBehaviour
 
   private void Update()
   {
-    if (spawnRecipeTimer<0f)
+    if (spawnRecipeTimer<=0f)
     {
       spawnRecipeTimer = spawnRecipeTimerMax;
       if (waitingRecipeSOList.Count < waitingrecipeMax)
