@@ -1,18 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeliveryManagerSingleUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TextMeshProUGUI recipeNameText;
+    [SerializeField] private Transform iconContainer;
+    [SerializeField] private Transform iconTemplate;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        iconTemplate.gameObject.SetActive(false);
+    }
+    public void SetRecipeSO(RecipeSO recipeSo)
+    {
+        recipeNameText.text = recipeSo.recipeName;
+        foreach (Transform child in iconContainer)
+        {
+            if (child==iconTemplate)
+            {
+                continue;
+            }
+            Destroy(child.gameObject);
+        }
+
+        foreach (KitchenObjectSO kitchenObjectSO in recipeSo.KitchenObjectSOList )
+        {
+            Transform iconTransform = Instantiate(iconTemplate, iconContainer);
+            iconTransform.gameObject.SetActive(true);
+            iconTransform.GetComponent<Image>().sprite = kitchenObjectSO.sprite;
+        }
     }
 }
