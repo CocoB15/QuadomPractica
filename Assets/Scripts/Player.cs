@@ -8,7 +8,9 @@ using UnityEngine.Serialization;
 public class Player : MonoBehaviour,IKitchenObjectParent
 {
     public static Player Instance { get; private set; }
-
+    public event EventHandler OnPickedSomething;
+   
+    
     [SerializeField]private float moveSpeed = 7f;
     [SerializeField]private float rotateSpeed = 10f;
     [SerializeField]private GameInput gameInput;
@@ -178,6 +180,10 @@ public class Player : MonoBehaviour,IKitchenObjectParent
     public void SetKitchenObject(KitchenObject kitchenObject)
     {
         this.kitchenObject = kitchenObject;
+        if (kitchenObject!=null)
+        {
+            OnPickedSomething?.Invoke(this,EventArgs.Empty);
+        }
     }
 
     public KitchenObject GetKitchenObject()
@@ -188,6 +194,8 @@ public class Player : MonoBehaviour,IKitchenObjectParent
     public void ClearKitchenObject()
     {
         kitchenObject = null;
+        
+        
     }
 
     public bool HasKitchenObject()

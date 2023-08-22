@@ -14,6 +14,8 @@ public class DeliveryManager : MonoBehaviour
   private int waitingrecipeMax = 4;
   public event EventHandler OnRecipeSpawned;
   public event EventHandler OnRecipeCompleted;
+  public event EventHandler OnRecipeSuccess;
+  public event EventHandler OnRecipeFailed;
 
   private void Awake()
   {
@@ -76,13 +78,14 @@ public class DeliveryManager : MonoBehaviour
          
           waitingRecipeSOList.RemoveAt(i);
           OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+          OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
           return;
         }
       }
     }
     //no matches found
     //player did not deliver correct recipe
-    
+    OnRecipeFailed?.Invoke(this, EventArgs.Empty);
   }
 
   public List<RecipeSO> GetWaitingRecipeSOList()
