@@ -2089,7 +2089,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlateCompleteVisual
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 241503172244891783, guid: 10e39c981f2de6441b54efde32ced8f0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
