@@ -10,11 +10,15 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager Instance { get; private set; }
     [SerializeField] private AudioClipsRefsSO audioClipsRefsSO;
+    private float volume = .5f;
+    [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioClip[] SFX;
 
     private void Awake()
     {
         Instance = this;
     }
+
     private void Start()
     {
         DeliveryManager.Instance.OnRecipeSuccess += DeliveryManager_OnRecipeSuccess;
@@ -27,52 +31,64 @@ public class SoundManager : MonoBehaviour
 
     private void TrashCounter_OnAnyObjectTrashed(object sender, EventArgs e)
     {
-        TrashCounter trashCounter=sender as TrashCounter;
-        PlaySound(audioClipsRefsSO.trash,trashCounter.transform.position);
+        TrashCounter trashCounter = sender as TrashCounter;
+        PlaySound(audioClipsRefsSO.trash, trashCounter.transform.position);
     }
 
     private void BaseCounter_OnAnyObjectPlacedHere(object sender, EventArgs e)
     {
-        BaseCounter baseCounter=sender as BaseCounter;
-        PlaySound(audioClipsRefsSO.objectDrop,baseCounter.transform.position);
+        BaseCounter baseCounter = sender as BaseCounter;
+        PlaySound(audioClipsRefsSO.objectDrop, baseCounter.transform.position);
     }
 
 
     private void Player_OnPickedSomething(object sender, EventArgs e)
     {
-        PlaySound(audioClipsRefsSO.objectPickup,Player.Instance.transform.position);
+        PlaySound(audioClipsRefsSO.objectPickup, Player.Instance.transform.position);
     }
 
     private void CuttingCounter_OnAnyCut(object sender, EventArgs e)
     {
-        CuttingCounter cuttingCounter = sender as CuttingCounter; 
-        PlaySound(audioClipsRefsSO.chop,cuttingCounter.transform.position);
+        CuttingCounter cuttingCounter = sender as CuttingCounter;
+        PlaySound(audioClipsRefsSO.chop, cuttingCounter.transform.position);
     }
 
     private void DeliveryManager_OnRecipeFailed(object sender, EventArgs e)
     {
-        DeliveryCounter deliveryCounter =DeliveryCounter.Instance;
-        PlaySound(audioClipsRefsSO.deliveryFail,deliveryCounter.transform.position);
+        DeliveryCounter deliveryCounter = DeliveryCounter.Instance;
+        PlaySound(audioClipsRefsSO.deliveryFail, deliveryCounter.transform.position);
     }
 
     private void DeliveryManager_OnRecipeSuccess(object sender, EventArgs e)
     {
-        DeliveryCounter deliveryCounter =DeliveryCounter.Instance;
-        PlaySound(audioClipsRefsSO.deliverySuccess,deliveryCounter.transform.position);
+        DeliveryCounter deliveryCounter = DeliveryCounter.Instance;
+        PlaySound(audioClipsRefsSO.deliverySuccess, deliveryCounter.transform.position);
     }
 
-    private void PlaySound(AudioClip audioClip, Vector3 position, float volume=1f )
+    private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f)
     {
-        AudioSource.PlayClipAtPoint(audioClip,position,volume);
+        AudioSource.PlayClipAtPoint(audioClip, position, volumeMultiplier);
     }
-    private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volume=1f )
+
+    private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volumeMultiplier = 1f)
     {
-        PlaySound(audioClipArray[Random.Range(0,audioClipArray.Length)],position,volume);
+        PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volumeMultiplier*volume);
+
+    }
+
+    public void PlayfootseptsSound(Vector3 position, float volume)
+    {
+        PlaySound(audioClipsRefsSO.footsteps, position, volume);
+    }
+
+    public void ChangebackgorundMusicVolume(float newValue)
+    {
         
+        backgroundMusic.volume = newValue;
     }
 
-    public void PlayfootseptsSound(Vector3 position,float volume)
+    public void ChangeSFXVolume(float newValue)
     {
-        PlaySound(audioClipsRefsSO.footsteps,position,volume);
+        
     }
 }
