@@ -3,16 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
 {
-
     public static SoundManager Instance { get; private set; }
     [SerializeField] private AudioClipsRefsSO audioClipsRefsSO;
     private float volume = .5f;
     [SerializeField] private AudioSource backgroundMusic;
-    [SerializeField] private AudioClip[] SFX;
+
 
     private void Awake()
     {
@@ -72,8 +72,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volumeMultiplier = 1f)
     {
-        PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volumeMultiplier*volume);
-
+        PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volumeMultiplier * volume);
     }
 
     public void PlayfootseptsSound(Vector3 position, float volume)
@@ -83,12 +82,18 @@ public class SoundManager : MonoBehaviour
 
     public void ChangebackgorundMusicVolume(float newValue)
     {
-        
         backgroundMusic.volume = newValue;
     }
 
-    public void ChangeSFXVolume(float newValue)
+    public void UpdateSoundVolumes(float newVolume)
     {
+        if (newVolume >= 0 && newVolume <= 1f)
+        {
+            volume = newVolume;
+            return;
+        }
+
+        Debug.Log("Volume not in bounds");
         
     }
 }

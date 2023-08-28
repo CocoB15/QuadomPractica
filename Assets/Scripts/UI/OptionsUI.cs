@@ -18,7 +18,10 @@ public class OptionsUI : MonoBehaviour
            
        });
        musicVolumeSlider.value = .5f;
-       
+       soundVolumeSlider.onValueChanged.AddListener((value) =>
+       {
+           SoundManager.Instance.UpdateSoundVolumes(value);
+       });
       
       
    }
