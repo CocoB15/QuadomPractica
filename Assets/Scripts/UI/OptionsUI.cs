@@ -29,6 +29,7 @@ public class OptionsUI : MonoBehaviour
         {
             SoundManager.Instance.UpdateSoundVolumes(value);
         });
+        soundVolumeSlider.value = .5f;
         closeButton.onClick.AddListener(() =>
         {
             Hide();

@@ -12,11 +12,15 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClipsRefsSO audioClipsRefsSO;
     private float volume = .5f;
     [SerializeField] private AudioSource backgroundMusic;
+    private const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME = "SoundEffectsVolume";
+    private const string PLAYER_PREFS_MUSIC_VOLUME = "MusicVolume";
 
 
     private void Awake()
     {
         Instance = this;
+        volume=PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, .5f);
+        backgroundMusic.volume = PlayerPrefs.GetFloat(PLAYER_PREFS_MUSIC_VOLUME, .5f);
     }
 
     private void Start()
@@ -83,6 +87,8 @@ public class SoundManager : MonoBehaviour
     public void ChangebackgorundMusicVolume(float newValue)
     {
         backgroundMusic.volume = newValue;
+        PlayerPrefs.SetFloat(PLAYER_PREFS_MUSIC_VOLUME,backgroundMusic.volume);
+        PlayerPrefs.Save();
     }
 
     public void UpdateSoundVolumes(float newVolume)
@@ -90,10 +96,10 @@ public class SoundManager : MonoBehaviour
         if (newVolume >= 0 && newVolume <= 1f)
         {
             volume = newVolume;
+            PlayerPrefs.SetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME,volume);
+            PlayerPrefs.Save();
             return;
         }
-
         Debug.Log("Volume not in bounds");
-        
     }
 }
