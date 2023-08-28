@@ -32,6 +32,12 @@ public class OptionsUI : MonoBehaviour
     {
         Instance = this;
         moveUpButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Move_Up);});
+        moveDownButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Move_Down);});
+        moveLeftButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Move_Left);});
+        moveRightButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Move_Right);});
+        interactButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Interact);});
+        altInteractButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.InteractAlternate);});
+        pauseButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Pause);});
     }
 
     public void Start()
