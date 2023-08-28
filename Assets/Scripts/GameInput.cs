@@ -89,4 +89,15 @@ public class GameInput : MonoBehaviour
            
       }
    }
+
+   public void Rebinding(Binding binding, Action onActionRebound)
+   {
+      playerInputActions.Player.Disable();
+      playerInputActions.Player.Move.PerformInteractiveRebinding(1).OnComplete(callback =>
+      {
+         callback.Dispose();
+         playerInputActions.Player.Enable();
+         onActionRebound();
+      }).Start();
+   }
 }
