@@ -19,6 +19,8 @@ public class OptionsUI : MonoBehaviour
     [SerializeField] private Button interactButton;
     [SerializeField] private Button altInteractButton;
     [SerializeField] private Button pauseButton;
+    [SerializeField] private Button gamepadInteractButton;
+    [SerializeField] private Button gamepadAltInteractButton;
     [SerializeField] private TextMeshProUGUI moveUpText;
     [SerializeField] private TextMeshProUGUI moveDownText;
     [SerializeField] private TextMeshProUGUI moveLeftText;
@@ -26,11 +28,15 @@ public class OptionsUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI interactText;
     [SerializeField] private TextMeshProUGUI altInteractText;
     [SerializeField] private TextMeshProUGUI pauseText;
+    [SerializeField] private TextMeshProUGUI gamepadInteractText;
+    [SerializeField] private TextMeshProUGUI gamepadAltInteractText;
     [SerializeField] private Transform pressToRebindKeyTransform;
+    private Action onCloseButtonAction;
 
     public void Awake()
     {
         Instance = this;
+        
         moveUpButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Move_Up);});
         moveDownButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Move_Down);});
         moveLeftButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Move_Left);});
@@ -38,6 +44,8 @@ public class OptionsUI : MonoBehaviour
         interactButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Interact);});
         altInteractButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.InteractAlternate);});
         pauseButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Pause);});
+        gamepadInteractButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Gamepad_Interact);});
+        gamepadAltInteractButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Gamepad_InteractAlternate);});
     }
 
     public void Start()
@@ -46,10 +54,17 @@ public class OptionsUI : MonoBehaviour
         {
             SoundManager.Instance.ChangebackgorundMusicVolume(value);
         });
-        musicVolumeSlider.value = .5f;
+        //save changes to music slider
+        musicVolumeSlider.value = PlayerPrefs.GetFloat(SoundManager.PLAYER_PREFS_MUSIC_VOLUME, 1f);
+        //save changes to SFX slider
+        soundVolumeSlider.value = PlayerPrefs.GetFloat(SoundManager.PLAYER_PREFS_SOUND_EFFECTS_VOLUME, 1f);
+        
         soundVolumeSlider.onValueChanged.AddListener((value) => { SoundManager.Instance.UpdateSoundVolumes(value); });
-        soundVolumeSlider.value = .5f;
-        closeButton.onClick.AddListener(() => { Hide(); });
+        closeButton.onClick.AddListener(() =>
+        {
+            Hide();
+            onCloseButtonAction();
+        });
         UpdateVisual();
         KitchenGameManager.Instance.OnGameUnpaused += KitchenGameManager_OnGameUnpaused;
         Hide();
@@ -65,6 +80,8 @@ public class OptionsUI : MonoBehaviour
         interactText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Interact);
         altInteractText.text = GameInput.Instance.GetBindingText(GameInput.Binding.InteractAlternate);
         pauseText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Pause);
+        gamepadInteractText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Gamepad_Interact);
+        gamepadAltInteractText.text = GameInput.Instance.GetBindingText(GameInput.Binding.Gamepad_InteractAlternate);
     }
 
     private void KitchenGameManager_OnGameUnpaused(object sender, EventArgs e)
@@ -72,9 +89,12 @@ public class OptionsUI : MonoBehaviour
         Hide();
     }
 
-    public void Show()
+    public void Show(Action onCloseButtonAction)
     {
+        this.onCloseButtonAction = onCloseButtonAction;
         gameObject.SetActive(true);
+        
+        musicVolumeSlider.Select();
     }
 
     public void Hide()

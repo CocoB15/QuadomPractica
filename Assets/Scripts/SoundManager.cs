@@ -12,15 +12,15 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClipsRefsSO audioClipsRefsSO;
     private float volume = .5f;
     [SerializeField] private AudioSource backgroundMusic;
-    private const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME = "SoundEffectsVolume";
-    private const string PLAYER_PREFS_MUSIC_VOLUME = "MusicVolume";
+    public const string PLAYER_PREFS_SOUND_EFFECTS_VOLUME = "SoundEffectsVolume";
+    public const string PLAYER_PREFS_MUSIC_VOLUME = "MusicVolume";
 
 
     private void Awake()
     {
         Instance = this;
-        volume=PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, .5f);
-        backgroundMusic.volume = PlayerPrefs.GetFloat(PLAYER_PREFS_MUSIC_VOLUME, .5f);
+        volume=PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, 1f);
+        backgroundMusic.volume = PlayerPrefs.GetFloat(PLAYER_PREFS_MUSIC_VOLUME, 1f);
     }
 
     private void Start()
