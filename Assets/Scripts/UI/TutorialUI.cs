@@ -21,7 +21,7 @@ public class TutorialUI : MonoBehaviour
    private void Start()
    {
       GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
-      
+
    }
    private void GameInput_OnInteractAction(object sender, EventArgs e)
    {
