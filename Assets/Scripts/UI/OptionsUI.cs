@@ -46,6 +46,7 @@ public class OptionsUI : MonoBehaviour
         pauseButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Pause);});
         gamepadInteractButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Gamepad_Interact);});
         gamepadAltInteractButton.onClick.AddListener(() =>{RebindingBinding(GameInput.Binding.Gamepad_InteractAlternate);});
+        
     }
 
     public void Start()

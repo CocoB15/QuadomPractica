@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button tutorialButton;
 
     private void Awake()
     {
@@ -16,6 +18,10 @@ public class MainMenuUI : MonoBehaviour
         {
             Loader.Load(Loader.Scene.GameScene);
         });
+        tutorialButton.onClick.AddListener(() =>
+        {
+            TutorialUI.Instance.Show();
+        });
         quitButton.onClick.AddListener(() =>
         {
             Application.Quit();
@@ -23,6 +29,15 @@ public class MainMenuUI : MonoBehaviour
 
         Time.timeScale = 1f;
     }
+
+    private void Start()
+    {
+        TutorialUI.Instance.Hide();
+        
+    }
+
+   
+
 
     private void PlayClick()
     {
