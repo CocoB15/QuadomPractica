@@ -232,6 +232,8 @@ GameObject:
   - component: {fileID: 5143205054023408634}
   - component: {fileID: 8683271528121634491}
   - component: {fileID: 4977618538497255439}
+  - component: {fileID: 487814218016479055}
+  - component: {fileID: 7574385788606958950}
   m_Layer: 6
   m_Name: StoveBurnWarningUI
   m_TagString: Untagged
@@ -347,6 +349,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7058e472124456d43bbb26602a65c7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stoveCounter: {fileID: 8114018681318769969}
+--- !u!95 &487814218016479055
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067743620837357669}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1532b1f6b5f4f9b45a319dce0c503c55, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!225 &7574385788606958950
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6067743620837357669}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &680941153073579369
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -763,8 +798,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1087801659943511315, guid: bb681639869d38c4094c9ea74e8d66b8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1505913228725410856}
   m_SourcePrefab: {fileID: 100100000, guid: bb681639869d38c4094c9ea74e8d66b8, type: 3}
+--- !u!1 &1161684632716976734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1087801659943511315, guid: bb681639869d38c4094c9ea74e8d66b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2235905120672106317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1505913228725410856
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161684632716976734}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5872ae99461ab44d9294b546d402005, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!224 &3386396746105285219 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3601017380270484782, guid: bb681639869d38c4094c9ea74e8d66b8,
