@@ -803,6 +803,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1505913228725410856}
+    - targetCorrespondingSourceObject: {fileID: 4680097578894259094, guid: bb681639869d38c4094c9ea74e8d66b8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1938694128401345765}
   m_SourcePrefab: {fileID: 100100000, guid: bb681639869d38c4094c9ea74e8d66b8, type: 3}
 --- !u!1 &1161684632716976734 stripped
 GameObject:
@@ -836,6 +840,25 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2235905120672106317}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6914305464851969243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4680097578894259094, guid: bb681639869d38c4094c9ea74e8d66b8,
+    type: 3}
+  m_PrefabInstance: {fileID: 2235905120672106317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1938694128401345765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6914305464851969243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2de896fe7cd0bce4f936a7113ee29c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoveCounter: {fileID: 8114018681318769969}
 --- !u!1001 &8731946055235560376
 PrefabInstance:
   m_ObjectHideFlags: 0
